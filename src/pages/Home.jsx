@@ -11,10 +11,6 @@ function Home() {
   const [expandedFaq, setExpandedFaq] = useState(null);
 
   // If no trip exists, show the form instead of landing page
-  if (!trip) {
-    return <DestinationForm />;
-  }
-
   const faqItems = [
     {
       id: 1,
