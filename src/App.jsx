@@ -5,12 +5,15 @@ import Planner from "./pages/Planner";
 import Analytics from "./pages/Analytics";
 import Notes from "./pages/Notes";
 import Documents from "./pages/Documents";
+import DestinationForm from "./componenets/DestinationForm";
 
 function App() {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/form" element={<DestinationForm />} />
+
         <Route path="/planner" element={<Planner />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/notes" element={<Notes />} />
