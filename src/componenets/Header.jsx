@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TripContext } from "../context/TripContext";
 import { MdDelete } from "react-icons/md";
-import { FaChartBar, FaStickyNote, FaBars, FaTimes } from "react-icons/fa";
+import { FaChartBar, FaStickyNote, FaBars, FaTimes, FaFileAlt } from "react-icons/fa";
 
 const Header = () => {
   const { trip, setTrip } = useContext(TripContext);
@@ -48,6 +48,13 @@ const Header = () => {
               Notes
             </button>
             <button
+              onClick={() => navigate("/documents")}
+              className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2"
+            >
+              <FaFileAlt size={20} />
+              Documents
+            </button>
+            <button
               onClick={() => navigate("/analytics")}
               className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition flex items-center gap-2"
             >
@@ -90,6 +97,13 @@ const Header = () => {
               >
                 <FaStickyNote size={18} />
                 Notes
+              </button>
+              <button
+                onClick={() => handleNavigation("/documents")}
+                className="w-full bg-green-600 hover:bg-green-700 text-white px-4 py-3 rounded-lg font-semibold transition flex items-center justify-center gap-2 text-sm"
+              >
+                <FaFileAlt size={18} />
+                Documents
               </button>
               <button
                 onClick={() => handleNavigation("/analytics")}

@@ -69,7 +69,15 @@ const PrayerTimesWidget = ({ destination }) => {
       let nextPrayer = prayerList[0];
 
       for (let p of prayerList) {
-        const [hours, minutes] = p.time.split(":").map(Number);
+        // Extract only HH:MM from the time string (removes timezone info if present)
+        const timeStr = p.time.split(' ')[0]; // Get "04:30" from "04:30 (GMT+02:00)"
+        const [hours, minutes] = timeStr.split(":").map(Number);
+        
+        if (isNaN(hours) || isNaN(minutes)) {
+          console.log('Invalid time format:', p.time);
+          continue;
+        }
+        
         const prayerTime = new Date();
         prayerTime.setHours(hours, minutes, 0, 0);
 
@@ -80,7 +88,14 @@ const PrayerTimesWidget = ({ destination }) => {
       }
 
       const nextTime = new Date();
-      const [hours, minutes] = nextPrayer.time.split(":").map(Number);
+      const nextTimeStr = nextPrayer.time.split(' ')[0];
+      const [hours, minutes] = nextTimeStr.split(":").map(Number);
+      
+      if (isNaN(hours) || isNaN(minutes)) {
+        console.log('Invalid next prayer time:', nextPrayer.time);
+        return;
+      }
+      
       nextTime.setHours(hours, minutes, 0, 0);
 
       const diff = nextTime - now;
@@ -89,8 +104,8 @@ const PrayerTimesWidget = ({ destination }) => {
 
       setCountdown({
         name: nextPrayer.name,
-        hours: hoursLeft,
-        minutes: minutesLeft,
+        hours: Math.max(0, hoursLeft),
+        minutes: Math.max(0, minutesLeft),
       });
     };
 

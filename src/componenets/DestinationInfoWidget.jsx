@@ -44,34 +44,47 @@ const DestinationInfoWidget = ({ destination }) => {
           searchDestination = cityToCountry[searchDestination];
         }
 
+        console.log('Fetching info for:', searchDestination);
+        
         const response = await fetch(
           `https://restcountries.com/v3.1/name/${searchDestination}`
         );
-        const data = await response.json();
+        
+        if (!response.ok) {
+          console.error(`API error: ${response.status}`);
+          setLoading(false);
+          return;
+        }
 
-        if (!data || data.length === 0) {
-          console.log(`No info found for: ${searchDestination}`);
+        const data = await response.json();
+        console.log('API response:', data);
+
+        if (!data || !Array.isArray(data) || data.length === 0) {
+          console.log(`No data found for: ${searchDestination}`);
           setLoading(false);
           return;
         }
 
         const country = data[0];
-        const languages = Object.values(country.languages || {}).join(', ');
-        const population = country.population?.toLocaleString() || 'N/A';
+        
+        // Safely extract data with fallbacks
+        const languages = country.languages ? Object.values(country.languages).join(', ') : 'N/A';
+        const population = country.population ? country.population.toLocaleString() : 'N/A';
         const region = country.region || 'N/A';
-        const capital = country.capital?.[0] || 'N/A';
+        const capital = country.capital && country.capital.length > 0 ? country.capital[0] : 'N/A';
+        const area = country.area ? country.area.toLocaleString() + ' km²' : 'N/A';
 
         setInfo({
-          name: country.name.common,
+          name: country.name?.common || destination,
           region,
           capital,
           languages,
           population,
-          area: country.area?.toLocaleString() + ' km²' || 'N/A',
+          area,
         });
         setLoading(false);
       } catch (err) {
-        console.error('Info fetch error:', err.message);
+        console.error('Info fetch error:', err.message, err);
         setLoading(false);
       }
     };

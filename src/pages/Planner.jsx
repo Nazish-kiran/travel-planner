@@ -104,7 +104,7 @@ const Planner = () => {
 
           {/* Right Sidebar - Widgets */}
           <div className="lg:col-span-1">
-            <div className="sticky top-24 space-y-4 md:space-y-6 overflow-y-auto max-h-[calc(100vh-100px)]">
+            <div className="sticky top-2 space-y-4 md:space-y-6 overflow-y-auto max-h-[calc(100vh-20px)]">
               <Weather destination={trip.destination} />
               <TimezoneWidget destination={trip.destination} />
               <CurrencyWidget destination={trip.destination} />
