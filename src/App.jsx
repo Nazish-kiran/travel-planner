@@ -11,8 +11,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<DestinationForm/>} />
-         <Route path="/home" element={<Home />} />
+        {/* <Route path="/" element={<DestinationForm />} /> */}
+        <Route path="/home" element={<Home />} />
         <Route path="/planner" element={<Planner />} />
         <Route path="/analytics" element={<Analytics />} />
         <Route path="/notes" element={<Notes />} />
