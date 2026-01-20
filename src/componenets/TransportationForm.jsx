@@ -42,8 +42,8 @@ const TransportationForm = () => {
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-2">
           <FaPlane size={24} className="text-orange-600" />
-          <h2 className="text-xl font-bold text-slate-800">Transportation</h2>
-          <span className="text-lg font-semibold text-orange-600">${transportCost.toFixed(2)}</span>
+          <h2 className="text-xl font-bold text-slate-800 ">Transportation</h2>
+          <span className="text-lg font-semibold text-orange-600 mr-2">${transportCost.toFixed(2)}</span>
         </div>
         <button
           onClick={() => setIsOpen(!isOpen)}
@@ -95,7 +95,7 @@ const TransportationForm = () => {
 
       <div className="space-y-3">
         {transports.map(t => (
-          <div key={t.id} className="bg-orange-50 p-4 rounded-lg border border-orange-200 flex justify-between items-start">
+          <div key={t.id} className="bg-orange-50 p-4 rounded-lg border border-orange-200 flex justify-between items-start gap-4">
             <div className="flex-1">
               <p className="font-bold text-slate-800">{t.type}</p>
               <p className="text-sm text-slate-600 mt-1">{t.details}</p>
@@ -103,7 +103,7 @@ const TransportationForm = () => {
             </div>
             <button
               onClick={() => removeTransport(t.id)}
-              className="text-red-600 hover:text-red-800 ml-4"
+              className="text-red-600 hover:text-red-800 flex-shrink-0"
             >
               <MdDelete size={20} />
             </button>
